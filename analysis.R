@@ -3,7 +3,7 @@ rm(list = ls())
 
 #### CREATING VARIABLES ----
 
-N =  9 #as.numeric(readline("enter number of subjects to be generated: "))
+N =  as.numeric(readline("enter number of subjects to be generated: "))
 df <- data.frame(
   subject = 1:N,
   age = floor(runif(N, 18, 60)),

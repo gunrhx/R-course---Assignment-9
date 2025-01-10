@@ -6,9 +6,34 @@
 ##a. numerical descriptive statistics ("results_numeric")
 ##b. character descriptive statistics ("results_character")
 
-descriptive_stats <- function(df) {
+descriptive_stats <- function(df) 
+{
   
-  if(nrow(df) < 10) {
+  #creating new data frame for subjects from user input
+  is_valid <- FALSE
+  while(!is_valid)
+  {
+    choice <- menu(c("All", "Certain Range"), title = "Choose range for descriptive statistics: ")
+    if (choice == 1) 
+    {
+      df_new <- df
+      is_valid = TRUE
+    }
+    else if (choice == 2)
+    {
+      message(paste("Possible range: ", 1, "-", nrow(df)))
+      subject_start <- as.numeric(readline("Enter the starting index: "))
+      subject_end <- as.numeric(readline("Enter the ending index: "))
+      df_new <- data.frame(df[subject_start:subject_end,])
+      is_valid = TRUE
+    }
+  }
+
+  
+  
+  #condition to make sure enough data exists for statistics (>10)
+  if(nrow(df_new) < 10) 
+  {
     return("data is too short")
   }
   
@@ -17,29 +42,33 @@ descriptive_stats <- function(df) {
   results_categorial = data.frame()
   temp = data.frame()
   
-  #loop for all column names
-  for (name in names(df)) {
+  #going through all column names
+  for (name in names(df_new))
+  {
     
     #condition for numeric variables:
-    if(class(df[[name]]) == "numeric") {
+    if(class(df_new[[name]]) == "numeric")
+    {
       temp <- data.frame(
         variable = name,
-        min = min(df[[name]]),
-        max = max(df[[name]]),
-        mean = mean(df[[name]]),
-        sd = sd(df[[name]])
+        min = min(df_new[[name]]),
+        max = max(df_new[[name]]),
+        mean = mean(df_new[[name]]),
+        sd = sd(df_new[[name]])
       )
       results_numeric = rbind(results_numeric, temp)
       temp = data.frame()
     }
     
     #condition for character variables:
-    else if(class(df[[name]]) == "character") {
-      temp_table <- table(df[[name]])
+    else if(class(df_new[[name]]) == "character")
+    {
+      temp_table <- table(df_new[[name]])
       counter = 1
       
       ##loop for categories in each character variable
-      for (Levels in unique(df[[name]])) {
+      for(Levels in unique(df_new[[name]]))
+      {
         
         temp <- data.frame(
           variable = name,
