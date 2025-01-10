@@ -3,7 +3,7 @@ rm(list = ls())
 
 #### CREATING VARIABLES ----
 
-N =  20 #as.numeric(readline("enter number of subjects to be generated: "))
+N =  9 #as.numeric(readline("enter number of subjects to be generated: "))
 df <- data.frame(
   subject = 1:N,
   age = floor(runif(N, 18, 60)),
@@ -12,5 +12,5 @@ df <- data.frame(
   depression = rnorm(N, 50, 20),
   avg_sleep_time = rnorm(N, 7, 2)
 )
-source("G:/Other computers/My Laptop/עומרי אוניברסיטה/תואר שני/1היכרות עם R/מטלות/מטלה 10/functions.R")
+source("G:/Other computers/My Laptop/עומרי אוניברסיטה/תואר שני/1היכרות עם R/GithubClones/R-course---Assignment-9/functions.R")
 descriptive_stats(df)

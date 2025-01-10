@@ -8,6 +8,10 @@
 
 descriptive_stats <- function(df) {
   
+  if(nrow(df) < 10) {
+    return("data is too short")
+  }
+  
   #setting empty variables
   results_numeric = data.frame()
   results_categorial = data.frame()
