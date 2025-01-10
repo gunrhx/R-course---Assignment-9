@@ -27,6 +27,10 @@ descriptive_stats <- function(df)
       df_new <- data.frame(df[subject_start:subject_end,])
       is_valid = TRUE
     }
+    else if(choice == 0)
+    {
+      return("Function averted")
+    }
   }
 
   
